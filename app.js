@@ -32,6 +32,8 @@ add_devs_form.addEventListener('submit', function(e){
 
 });
 
+//devs list on table
+
         getdata()
         function getdata() {
 
@@ -54,7 +56,7 @@ add_devs_form.addEventListener('submit', function(e){
         <td>${level}</td>
         <td><img class="tbs" src="${photo ? photo : './assets/img/male-avator.jpg'}" alt=""></td>
         <td><div class="btn-list">
-        <div class="view btn btn-info btn-sm"><i><i class="fa-solid fa-eye"></i></i></div>
+        <div viewIdex="${index}" class="view btn btn-info lol btn-sm" data-bs-toggle="modal" data-bs-target="#view_modal"><i><i class="fa-solid fa-eye"></i></i></div>
         <div class="edit btn btn-primary btn-sm"><i><i class="fa-solid fa-edit"></i></i></div>
         <div class="del btn btn-danger btn-sm"><i><i class="fa-solid fa-trash"></i></i></div>
         </div></td>
@@ -65,4 +67,52 @@ add_devs_form.addEventListener('submit', function(e){
             });
 
             devs_list.innerHTML = list;
-        }
+        };
+
+
+ 
+        devs_list.addEventListener('click', function(e){
+            const viewButton = e.target.closest('.lol');
+
+            if(viewButton){
+
+                const viewIndex =viewButton.getAttribute('viewIdex')
+                viewModal(viewIndex);
+               
+            }
+            
+        })
+
+       
+
+
+        //view modal 
+        function viewModal(id){
+
+            let viewItem = document.querySelector('#viewItm');
+            let data = Storage.get('devs');
+            let viewList = data[id];
+           
+            let {name, email, skill, level, discription, photo} = viewList;
+            console.log(photo);
+            viewItem.innerHTML = `
+            <div class="row text-center">
+            <div class="col-lg-6">
+             <img class="viewImage img-thumbnail" src="${ photo == '' ? './assets/img/male-avator.jpg' : photo }" alt="">
+           </div>
+           <div class="col-lg-6 my-1">
+            <h4>Name : ${name}</h4>
+            <p>Email: ${email}</p>
+            <p>skill : ${skill}</p>
+            <p>Level : ${level}</p>
+            <p>Discription : ${discription}</p>
+            
+
+           </div>
+         </div>
+
+            `;
+
+            
+            
+        };

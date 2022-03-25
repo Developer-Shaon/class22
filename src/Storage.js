@@ -19,11 +19,11 @@ class Storage{
         if( this.has(key) ){
 
             setdata = JSON.parse(this.has(key));
-            console.log(setdata);
+            
         }
         setdata.push(value);
         localStorage.setItem(key, JSON.stringify(setdata));
-        console.log('done');
+        
     };
 
 

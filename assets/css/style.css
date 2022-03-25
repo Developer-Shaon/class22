@@ -17,3 +17,10 @@ body {
 	height: 50px;
 	object-fit: cover;
 }
+
+.viewImage{
+
+	width: 250px;
+	height: 250px;
+	object-fit: cover;
+}
